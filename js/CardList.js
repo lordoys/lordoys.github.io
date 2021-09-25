@@ -17,6 +17,6 @@ export default class CardList {
             list.appendChild(card.createCard());
         });
 
-        return list;
+        document.getElementById('main').appendChild(list);
     }
 }
