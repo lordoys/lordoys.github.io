@@ -7,9 +7,8 @@ export default class CardList {
     }
 
     createList() {
-        console.log(this.data);
-
         let list = document.createElement('ul');
+
         list.classList.add('list');
 
         this.data.forEach((item) => {
