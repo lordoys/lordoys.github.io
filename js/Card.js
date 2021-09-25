@@ -1,34 +1,42 @@
 export default class Card {
-    constructor(author, title, description, url) {
-        this.author = author || '';
-        this.title = title || '';
-        this.description = description || '';
-        this.url = url || '';
+    constructor(data) {
+        this.author = data.author || '';
+        this.title = data.title || '';
+        this.description = data.description || '';
+        this.href = data.url || '';
+        this.mainClass= 'card';
+    }
+
+    createElement(tag, className, text, href) {
+        let element = document.createElement(tag);
+
+        if (text) {
+            element.textContent = text;
+        }
+
+        if (Array.isArray(className)) {
+            element.classList.add(...className);
+        } else if (className) {
+            element.classList.add(className);
+        }
+
+        if (href) {
+            element.href = this.href;
+        }
+
+        return element;
     }
 
     createCard() {
-        let card = document.createElement('div');
-        card.classList.add('card');
+        let card = this.createElement('div', this.mainClass);
+        let author = this.createElement('p', 'card__author', this.author);
+        let title = this.createElement('h2', 'card__title', this.title);
+        let description = this.createElement('p', 'card__description', this.description);
+        let link = this.createElement('a', 'card__link', 'Read more', this.href);
 
-        let author = document.createElement('p');
-        author.textContent = this.author;
-        author.classList.add('card__author');
         card.appendChild(author);
-
-        let title = document.createElement('p');
-        title.textContent = this.title;
-        title.classList.add('card__title');
         card.appendChild(title);
-
-        let description = document.createElement('p');
-        description.textContent = this.description;
-        description.classList.add('card__description');
         card.appendChild(description);
-
-        let link = document.createElement('a');
-        link.textContent = 'Read more';
-        link.href = this.url;
-        link.classList.add('card__link');
         card.appendChild(link);
 
         return card;
